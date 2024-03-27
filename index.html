@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+	<title> Word </title>
+</head>
+<body>
+	<header>
+		<div class="box-contentHeader">
+			<div class="undoRedo"> <!-- Desfazer/Refazer -->
+				<button id="undo" class="option-button">
+					<i class="fa-solid fa-rotate-left"></i>
+				</button>
+
+				<button id="redo" class="option-button">
+					<i class="fa-solid fa-rotate-right"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="box-contentHeader">
+			<nav>
+				<button> Arquivo </button>
+				<button id="btnInicial" class="btnActive"> Página Inicial </button>
+				<button id="btnInserir"> Inserir </button>
+				<button id="btnDesenhar"> Desenhar </button>
+				<button id="btnDesign"> Design </button>
+				<button id="btnLayout"> Layout </button>
+				<button id="btnReferencia"> Referências </button>
+				<button id="btnCorresp"> Correspondências </button>
+				<button id="btnRevisao"> Revisão </button>
+				<button id="btnExibir"> Exibir </button>
+				<button> Ajuda </button>
+			</nav>
+
+			<div class="boxBtns-Header">
+				<button> <i class="far fa-comment-alt fa-lg"></i> Comentários </button>
+				<button> <i class="fa fa-pencil fa-lg"></i> Editando </button>
+				<button> <i class="far fa-share-from-square fa-lg"></i> Compartilhamento </button>
+			</div>
+		</div>
+
+		<div class="containerMenu">
+			<div class="contentInicial">
+				<div class="box-inicial"> 
+					<div class="font">
+						<div class="fontsStyle">
+							<select id="fontName" class="adv-option-button"></select>
+							<select id="fontSize" class="adv-option-button"></select>
+						</div>
+
+						<div class="textFormat">
+							<button id="bold" class="option-button format">
+								<i class="fa-solid fa-bold"></i>
+							</button>
+
+							<button id="italic" class="option-button format">
+								<i class="fa-solid fa-italic"></i>
+							</button>
+
+							<button id="underline" class="option-button format">
+								<i class="fa-solid fa-underline"></i>
+							</button>
+
+							<button id="strikethrough" class="option-button format">
+								<i class="fa-solid fa-strikethrough"></i>
+							</button>
+
+							<button id="superscript" class="option-button format scriptFormat">
+								<i class="fa-solid fa-superscript"></i>
+							</button>
+
+							<button id="subscript" class="option-button format scriptFormat">
+								<i class="fa-solid fa-subscript"></i>
+							</button>
+						</div>
+					</div>
+
+					<h6> Fonte </h6>
+				</div>
+
+				<div class="box-inicial">
+					<div class="paragraph">
+						<div class="list">
+							<div class="btnList">
+								<button id="insertUnorderedList" class="option-button">
+									<i class="fa-solid fa-list-ul"></i>
+								</button>
+
+								<button id="insertOrderedList" class="option-button">
+									<i class="fa-solid fa-list-ol"></i>
+								</button>
+							</div>
+
+							<div class="btnsBackOff">
+								<button id="indent" class="option-button">
+									<i class="fa-solid fa-indent"></i>
+								</button>
+
+								<button id="outdent" class="option-button">
+									<i class="fa-solid fa-outdent"></i>
+								</button>
+							</div>
+						</div>
+
+						<div class="align">
+							<button id="justifyLeft" class="option-button active">
+								<i class="fa-solid fa-align-left"></i>
+							</button>
+
+							<button id="justifyCenter" class="option-button">
+								<i class="fa-solid fa-align-center"></i>
+							</button>
+
+							<button id="justifyRight" class="option-button">
+								<i class="fa-solid fa-align-right"></i>
+							</button>
+
+							<button id="justifyFull" class="option-button">
+								<i class="fa-solid fa-align-justify"></i>
+							</button>
+						</div>
+
+						<div class="orderColor">
+							<input type="color" name="paintBucket" class="adv-option-button">
+
+							<i class="fa-solid fa-arrow-down-a-z"></i>
+						</div>
+					</div>
+
+					<h6> Parágrafo </h6>
+				</div>
+
+				<div class="box-inicial expan">
+					<div class="titlesStylesContainer" id="expandableContainer">
+						<div class="titlesStyles">
+							<div class="titleStyle active">
+								Normal
+							</div>
+
+							<div class="titleStyle alignLeft">
+								Sem Espaçamento
+							</div>
+
+							<div class="titleStyle">
+								Título 1
+							</div>
+
+							<div class="titleStyle">
+								Subtítulo 1
+							</div>
+
+							<div class="titleStyle">
+								Título 2
+							</div>
+
+							<div class="titleStyle">
+								Subtítulo 2
+							</div>
+
+							<div class="titleStyle">
+								Título 3
+							</div>
+
+							<div class="titleStyle">
+								Subtítulo 3
+							</div>
+						</div>
+						
+						<div class="btnsScroll">
+							<button id="btnScrollUp"> <i class="fa-solid fa-angle-up"></i> </button>
+							<button id="btnScrollDown"> <i class="fa-solid fa-angle-down"></i> </button>
+							<button id="expandTitlesBtn"> <i class="fa-solid fa-angle-double-down"></i> </button>
+						</div>
+					</div>
+
+					<h6> Estilos </h6>
+				</div>
+			</div>
+
+		</div>
+	</header>
+
+	<div class="contentText">
+		<div id="textDocument" contenteditable="true"></div>
+	</div>
+
+	<!-- Clique em Ctrl + Alguma tecla -->
+
+	<script type="text/javascript" src="./js/script.js"></script>
+	<script type="text/javascript" src="./js/scriptAtalhos.js"></script>
+</body>
+</html>
