@@ -1,0 +1,248 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background: #FFFFFF;
+	font-family: Arial;
+	outline: soslid;
+}
+
+header {
+	background: #FFFFFF;
+	position: sticky;
+	left: 0;
+	top: 0;
+	overflow: hidden;
+	padding: 5px;
+}
+
+.box-contentHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2.5px 0px;
+}
+
+.box-contentHeader .undoRedo {
+	padding: 0px 2.5px;
+}
+
+.undoRedo button {
+	border: 1px solid #FFFFFF;
+}
+
+.undoRedo button:hover,
+.btnsBackOff button:hover {
+	border: 1px solid #35353535;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+nav button {
+	border: 2px solid #FFFFFF;
+	padding: 2px;
+}
+
+nav button:hover,
+nav .btnActive {
+	border-bottom: 2px solid #000000;
+}
+
+.boxBtns-Header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.boxBtns-Header button {
+	border: 1px solid;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	padding: 4.5px 7px;
+}
+
+.containerMenu {
+	border: 1px solid;
+	display: flex;
+	align-items: start;
+	justify-content: center;
+	height: 110px;
+	padding: 5px 0px;
+	text-align: center;
+}
+
+
+/* =============================================
+ - ÁREA PÁGINA INICAL
+============================================= */
+.contentInicial {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+.box-inicial {
+	border-right: 1px solid #CCC;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
+	padding: 0px 5px;
+}
+
+.box-inicial button{
+	padding: 5px;
+	border: none;
+}
+
+.expan {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 325px;
+	padding: 0px 5px 0px 0px;
+	position: relative; /* Define a posição relativa para o contêiner pai */
+}
+
+.expan h6 {
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	position: absolute;
+	text-align: center;
+}
+
+.font .fontsStyle {
+	display: grid;
+	grid-template-columns: auto 28%;
+	gap: 1px;
+	width: 100%;
+}
+
+.font select {
+	padding: 2.5px 0.5px;
+}
+
+.font .textFormat {
+	display: flex;
+	gap: 17px;
+	padding: 6px 8px;
+}
+
+.paragraph {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5px;
+}
+
+.paragraph .orderColor input[name=paintBucket]{
+	position: relative;
+	border: none;
+	height: 15px;
+	width: 20px;
+	outline: none;
+}
+
+.paragraph .list {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+.titlesStylesContainer {
+	border: 1px solid #CCC;
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+	max-height: 57px;
+	position: absolute;
+	top: 8px;
+	z-index: 2;
+}
+
+.titlesStylesContainer.expanded {
+	max-height: none; /* Ajuste conforme necessário para a altura expandida */
+}
+
+.titlesStyles {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.expanded .titlesStyles {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+}
+
+.titleStyle {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 55px;
+	width: 102px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.expanded .titleStyle {
+	height: 45px;
+	width: 90px;
+	font-size: .87em;
+}
+
+.alignLeft {
+	justify-content: left !important;
+	padding: 2.5px;
+}
+
+.titleStyle:hover,
+.active {
+	background: #e0e9ff;
+	border: 1px solid #000000 !important;
+}
+
+.btnsScroll {
+	display: flex;
+	flex-direction: column;
+	position: sticky;
+	top: 0;
+	right: 0;
+}
+
+.btnsScroll button {
+	cursor: pointer;
+	border: 1px solid;
+	padding: .6px .8px;
+}
+
+.btnsScroll button i {
+	font-size: .7em;
+}
+
+/* =============================================
+ - CONTEÚDO
+============================================= */
+.contentText {
+	display: flex;
+	justify-content: center;
+}
+
+#textDocument{
+	border: 1px solid #000000;
+	height: 272.5mm;
+	width: 210mm;
+	margin: 10px auto;
+	padding: 20px;
+}
+
