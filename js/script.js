@@ -161,16 +161,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-document.getElementById('makeTextUppercase').addEventListener('click', function() {
+  document.getElementById('makeTextUppercase').addEventListener('click', function() {
     const selection = window.getSelection();
     if (!selection.rangeCount) return; // Sai se não houver seleção
 
     // Função para processar cada nó de texto dentro do range
     const processTextNode = (node) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-            const isAlreadyUppercase = node.nodeValue === node.nodeValue.toUpperCase();
-            node.nodeValue = isAlreadyUppercase ? node.nodeValue.toLowerCase() : node.nodeValue.toUpperCase();
-        }
+      if (node.nodeType === Node.TEXT_NODE) {
+        const isAlreadyUppercase = node.nodeValue === node.nodeValue.toUpperCase();
+        node.nodeValue = isAlreadyUppercase ? node.nodeValue.toLowerCase() : node.nodeValue.toUpperCase();
+      }
     };
 
     const range = selection.getRangeAt(0);
@@ -179,26 +179,26 @@ document.getElementById('makeTextUppercase').addEventListener('click', function(
 
     // Caminho especial se a seleção estiver toda dentro do mesmo nó de texto
     if (startContainer === endContainer && startContainer.nodeType === Node.TEXT_NODE) {
-        processTextNode(startContainer);
+      processTextNode(startContainer);
     } else {
         // Cria um iterador para percorrer todos os nós dentro do range
-        const documentFragment = range.cloneContents();
-        const iterator = document.createNodeIterator(documentFragment, NodeFilter.SHOW_TEXT);
+      const documentFragment = range.cloneContents();
+      const iterator = document.createNodeIterator(documentFragment, NodeFilter.SHOW_TEXT);
 
-        let currentNode;
-        while ((currentNode = iterator.nextNode())) {
-            processTextNode(currentNode);
-        }
+      let currentNode;
+      while ((currentNode = iterator.nextNode())) {
+        processTextNode(currentNode);
+      }
 
         // Substitui o conteúdo do range pelo fragmento processado
-        range.deleteContents();
-        range.insertNode(documentFragment);
+      range.deleteContents();
+      range.insertNode(documentFragment);
     }
 
     // Manter a seleção após a transformação
     selection.removeAllRanges();
     selection.addRange(range);
-});
+  });
 
 
 
@@ -264,5 +264,48 @@ document.getElementById('makeTextUppercase').addEventListener('click', function(
 
   // Adicionando o evento de clique ao botão de expansão de títulos
   document.getElementById('expandTitlesBtn').addEventListener('click', expandTitles);
+
+  let zoomLevel = 100;
+  const zoomable = document.getElementById('textDocument');
+  const zoomSlider = document.getElementById('zoomSlider');
+  const zoomIn = document.getElementById('zoomIn');
+  const zoomOut = document.getElementById('zoomOut');
+  const zoomValue = document.getElementById('value');
+
+  function updateZoom() {
+    zoomable.style.transform = `scale(${zoomLevel / 100})`;
+    zoomSlider.value = zoomLevel;
+    zoomValue.textContent = `${zoomLevel}%`;
+  }
+  function updateZoom() {
+    zoomable.style.transform = `scale(${zoomLevel / 100})`;
+    zoomSlider.value = zoomLevel;
+    zoomValue.textContent = `${zoomLevel}%`;
+
+    const additionalMargin = Math.max(0, (zoomLevel - 100) * 6);
+    zoomable.style.margin = `${additionalMargin}px auto`;
+  }
+
+  zoomSlider.oninput = () => {
+    zoomLevel = parseInt(zoomSlider.value);
+    updateZoom();
+  };
+
+  zoomIn.onclick = () => {
+    if (zoomLevel < 140) {
+      zoomLevel += 10;
+      updateZoom();
+    }
+  };
+
+  zoomOut.onclick = () => {
+    if (zoomLevel > 60) {
+      zoomLevel -= 10;
+      updateZoom();
+    }
+  };
+
+  updateZoom();
+
 });
 
