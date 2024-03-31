@@ -1,40 +1,14 @@
-// Seleciona a div onde o valor será exibido
-const containerMenu = document.querySelector('.containerMenu');
+function updateUndoRedoButtons() {
+  const canUndo = document.queryCommandEnabled('undo');
+  const canRedo = document.queryCommandEnabled('redo');
 
-// Função para atualizar o conteúdo da div
-function updateContent(value) {
-  containerMenu.innerHTML = value;
+  document.getElementById('undo').disabled = !canUndo;
+  document.getElementById('redo').disabled = !canRedo;
 }
 
-// Seleciona todos os botões
-const buttons = document.querySelectorAll('button[id^="btn"]'); // Seleciona botões cujo id começa com 'btn'
+document.getElementById('textDocument').addEventListener('input', updateUndoRedoButtons);
+document.addEventListener('DOMContentLoaded', updateUndoRedoButtons);
 
-// Função para remover a classe 'btnActive' de todos os botões
-function removeActiveClassFromAllButtons() {
-  buttons.forEach(button => {
-    button.classList.remove('btnActive');
-  });
-}
-
-// Função para adicionar a classe 'btnActive' ao botão clicado, remover de outros e atualizar o conteúdo
-function addButtonClickListener(button, content) {
-  button.addEventListener('click', function() {
-    removeActiveClassFromAllButtons(); // Remove a classe 'btnActive' de todos os botões
-    this.classList.add('btnActive'); // Adiciona a classe ao botão clicado
-    updateContent(content);
-  });
-}
-
-// Adicionando evento de clique e conteúdo específico para cada botão
-addButtonClickListener(document.getElementById('btnInicial'), `<h2> Bem-vindo! </h2>`);
-addButtonClickListener(document.getElementById('btnInserir'), `<h2> Inserir Dados </h2>`);
-addButtonClickListener(document.getElementById('btnDesenhar'), `<h2> Ferramentas de Desenho </h2>`);
-addButtonClickListener(document.getElementById('btnDesign'), `<h2> Opções de Design </h2>`);
-addButtonClickListener(document.getElementById('btnLayout'), `<h2> Configurações de Layout </h2>`);
-addButtonClickListener(document.getElementById('btnReferencia'), `<h2> Referências e Fontes </h2>`);
-addButtonClickListener(document.getElementById('btnCorresp'), `<h2> Correspondências </h2>`);
-addButtonClickListener(document.getElementById('btnRevisao'), `<h2> Revisar Conteúdo </h2>`);
-addButtonClickListener(document.getElementById('btnExibir'), `<h2> Exibir Resultados </h2>`);
 
 document.addEventListener('DOMContentLoaded', function() {
   // Função para remover a classe 'active' de todos os títulos
@@ -90,53 +64,59 @@ document.addEventListener('DOMContentLoaded', function() {
     document.execCommand(command, defaultUi, value);
   };
 
-  // Event listeners para botões de opção e opções avançadas
-  const optionButtons = document.querySelectorAll(".option-button");
+  document.getElementById('removeFormatting').addEventListener('click', function() {
+    document.execCommand('removeFormat', false, null);
 
-  // Função modificada para desativar botões
-  function deactivateButtons(container) {
-    container.querySelectorAll('.option-button').forEach(button => {
+    document.querySelectorAll('.option-button.format.active').forEach(button => {
       button.classList.remove('active');
     });
-  }
 
-  optionButtons.forEach(button => {
+    document.getElementById('backColor').value = '#FFFF00'; 
+    document.getElementById('foreColor').value = '#FF0000';
+  });
+
+
+  // Event listeners para botões de opção e opções avançadas
+  const optionButton = document.querySelectorAll(".option-button");
+  optionButton.forEach(button => {
     button.addEventListener("click", () => {
       modifyText(button.id, false, null);
       const containerNull = button.closest('.btnsBackOff');
       const containerList = button.closest('.btnList');
       const containerAlign = button.closest('.align');
       const containerFormat = button.closest('.textFormat');
+      const containerScriptFormat = button.closest('.btnScriptFormat');
+      
+      // Função para remover a classe 'active' de todos os botões no container especificado
+      function deactivateButtonsInContainer(container) {
+        container.querySelectorAll('.option-button').forEach(button => {
+          button.classList.remove('active');
+        });
+      }
 
-      // Verifica se o botão está dentro do containerList, mas não no containerNull
-      if (containerList && !containerNull) {
-        // Se o botão já estiver ativo, a classe 'active' será removida
+      // Se o botão estiver em containerList e não em containerNull, ou for scriptFormat em containerFormat
+      if ((containerList && !containerNull) || (containerScriptFormat)) {
+        button.classList.toggle("active"); // Toggle para o próprio botão
+        // Desativa outros botões se este estiver ativo agora
         if (button.classList.contains("active")) {
-          button.classList.remove("active");
-        } else {
-          // Desativa todos os botões no container e ativa o clicado
-          deactivateButtons(containerList);
-          button.classList.add("active");
+          deactivateButtonsInContainer(containerList || containerScriptFormat);
+          button.classList.add("active"); // Garante que o botão clicado fique ativo após a desativação dos outros
         }
-      } else if (containerAlign && !containerList && !containerNull) {
-        if (containerAlign) {
-          deactivateButtons(containerAlign);
-          button.classList.toggle("active");
-        } else {
-          button.classList.toggle("active");
-        }
-      } else if (containerFormat) {
-        if (button.classList.contains("active")) {
-          button.classList.remove("active");
-        } else {
-          button.classList.add("active");
-        }
+      } else if (containerAlign && !containerList && !containerNull) { // Caso específico para alinhamento
+        deactivateButtonsInContainer(containerAlign);
+        button.classList.toggle("active");
+      } else if (containerFormat && !button.classList.contains("scriptFormat")) { // Para outros formatos que não são scriptFormat
+        button.classList.toggle("active");
       }
     });
   });
 
-  const advancedOptionButtons = document.querySelectorAll(".adv-option-button");
-  advancedOptionButtons.forEach(button => {
+  // Definir as cores iniciais para foreColor e backColor
+  document.getElementById('backColor').value = '#FFFF00'; // Branco para backColor
+  document.getElementById('foreColor').value = '#FF0000'; // Preto para foreColor
+
+  const advancedOptionButton = document.querySelectorAll(".adv-option-button");
+  advancedOptionButton.forEach(button => {
     button.addEventListener("change", () => {
       modifyText(button.id, false, button.value);
     });
@@ -159,7 +139,68 @@ document.addEventListener('DOMContentLoaded', function() {
     option.value = i;
     option.textContent = i;
     fontSizeSelect.appendChild(option);
+    fontSizeSelect.value = 3;
   }
+
+  // Funcionalidade para aumentar e diminuir o tamanho da fonte
+  let currentFontSize = 3; // Começa com o valor médio da seleção de tamanho de fonte
+
+  document.getElementById('increaseFontSize').addEventListener('click', function() {
+    if (currentFontSize < 7) {
+      currentFontSize++;
+      fontSizeSelect.value = currentFontSize;
+      document.execCommand('fontSize', false, currentFontSize);
+    }
+  });
+
+  document.getElementById('decreaseFontSize').addEventListener('click', function() {
+    if (currentFontSize > 1) {
+      currentFontSize--;
+      fontSizeSelect.value = currentFontSize;
+      document.execCommand('fontSize', false, currentFontSize);
+    }
+  });
+
+document.getElementById('makeTextUppercase').addEventListener('click', function() {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return; // Sai se não houver seleção
+
+    // Função para processar cada nó de texto dentro do range
+    const processTextNode = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const isAlreadyUppercase = node.nodeValue === node.nodeValue.toUpperCase();
+            node.nodeValue = isAlreadyUppercase ? node.nodeValue.toLowerCase() : node.nodeValue.toUpperCase();
+        }
+    };
+
+    const range = selection.getRangeAt(0);
+    const startContainer = range.startContainer;
+    const endContainer = range.endContainer;
+
+    // Caminho especial se a seleção estiver toda dentro do mesmo nó de texto
+    if (startContainer === endContainer && startContainer.nodeType === Node.TEXT_NODE) {
+        processTextNode(startContainer);
+    } else {
+        // Cria um iterador para percorrer todos os nós dentro do range
+        const documentFragment = range.cloneContents();
+        const iterator = document.createNodeIterator(documentFragment, NodeFilter.SHOW_TEXT);
+
+        let currentNode;
+        while ((currentNode = iterator.nextNode())) {
+            processTextNode(currentNode);
+        }
+
+        // Substitui o conteúdo do range pelo fragmento processado
+        range.deleteContents();
+        range.insertNode(documentFragment);
+    }
+
+    // Manter a seleção após a transformação
+    selection.removeAllRanges();
+    selection.addRange(range);
+});
+
+
 
   const textDocument = document.getElementById('textDocument');
 
@@ -196,48 +237,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  /*// Função para adicionar eventos aos botões Desfazer e Refazer
-  function addUndoRedoListeners() {
-    const undoButton = document.getElementById('undo');
-    const redoButton = document.getElementById('redo');
-
-    undoButton.addEventListener('click', function() {
-      document.execCommand('undo', false, null);
-    });
-
-    redoButton.addEventListener('click', function() {
-      document.execCommand('redo', false, null);
-    });
+  // Função para desabilitar os botões
+  function disableAllButtons() {
+    document.getElementById('btnScrollUp').disabled = true;
+    document.getElementById('btnScrollDown').disabled = true;
   }
 
-  addUndoRedoListeners();*/
+  // Função para habilitar os botões
+  function enableAllButtons() {
+    document.getElementById('btnScrollUp').disabled = false;
+    document.getElementById('btnScrollDown').disabled = false;
+  }
+
+
+  // Modificar a função de clique do botão de expansão de títulos para alternar entre expandir e contrair
+  function expandTitles() {
+    var container = document.getElementById('expandableContainer');
+    container.classList.toggle('expanded');
+    // Se o container estiver expandido, desativar todos os botões
+    if (container.classList.contains('expanded')) {
+      disableAllButtons();
+    } else { // Caso contrário, habilitar todos os botões
+      enableAllButtons();
+    }
+  }
+
+  // Adicionando o evento de clique ao botão de expansão de títulos
+  document.getElementById('expandTitlesBtn').addEventListener('click', expandTitles);
 });
-
-// Função para desabilitar os botões
-function disableAllButtons() {
-  document.getElementById('btnScrollUp').disabled = true;
-  document.getElementById('btnScrollDown').disabled = true;
-}
-
-// Função para habilitar os botões
-function enableAllButtons() {
-  document.getElementById('btnScrollUp').disabled = false;
-  document.getElementById('btnScrollDown').disabled = false;
-}
-
-
-// Modificar a função de clique do botão de expansão de títulos para alternar entre expandir e contrair
-function expandTitles() {
-  var container = document.getElementById('expandableContainer');
-  container.classList.toggle('expanded');
-  // Se o container estiver expandido, desativar todos os botões
-  if (container.classList.contains('expanded')) {
-    disableAllButtons();
-  } else { // Caso contrário, habilitar todos os botões
-    enableAllButtons();
-  }
-}
-
-// Adicionando o evento de clique ao botão de expansão de títulos
-document.getElementById('expandTitlesBtn').addEventListener('click', expandTitles);
 
