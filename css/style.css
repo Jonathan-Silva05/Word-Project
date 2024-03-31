@@ -17,6 +17,7 @@ header {
 	overflow: hidden;
 	padding: 5px;
 	user-select: none;
+  z-index: 100;
 }
 
 .box-contentHeader {
@@ -195,7 +196,22 @@ option {
 	padding: 2.5px 6px;
 }
 
-.font input[type=color]{
+.font .color .btnsColor{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.font .color .btnsColor label{
+	margin-bottom: -3px;
+}
+
+.font .color .btnsColor i{
+	font-size: .75em;
+}
+
+.font .color input[type=color]{
 	position: relative;
 	border: none;
 	height: 15px;
@@ -300,8 +316,45 @@ option {
 	margin: 10px auto;
 	outiline: none;
 	padding: 20px;
+  transition: transform 0.2s;
+  transform-origin: center center;
 }
 
 #textDocument:focus{
 	outiline: 1px solid #c5c5c5;
 }
+
+/* =============================================
+ - CONTEÚDO
+============================================= */
+footer {
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: sticky;
+}
+
+.btnsZoom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9em;
+  gap: 5px;
+  padding: 10px;
+  z-index: 100;
+}
+
+.btnsZoom button {
+  border: none;
+  font-weight: bold;
+}
+
+.btnsZoom #value {
+  text-align: center;
+  width: 40px;
+}
+
