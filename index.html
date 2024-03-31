@@ -43,55 +43,79 @@
 			</nav>
 
 			<div class="boxBtns-Header">
-				<button> <i class="far fa-comment-alt fa-lg"></i> Comentários </button>
-				<button> <i class="fa fa-pencil fa-lg"></i> Editando </button>
-				<button> <i class="far fa-share-from-square fa-lg"></i> Compartilhamento </button>
+				<button> <i class="far fa-comment-alt"></i> Comentários </button>
+				<button> <i class="fa fa-pencil"></i> Editando </button>
+				<button class="share"> <i class="far fa-share-from-square"></i> Compartilhamento </button>
 			</div>
 		</div>
 
 		<div class="containerMenu">
 			<div class="contentInicial">
-				<div class="box-inicial"> 
+				<div class="box-inicial borderRight"> 
 					<div class="font">
-						<div class="fontsStyle">
-							<select id="fontName" class="adv-option-button"></select>
-							<select id="fontSize" class="adv-option-button"></select>
+						<div class="line">
+							<div class="fontsStyle borderRight">
+								<select id="fontName" class="adv-option-button"></select>
+								<select id="fontSize" class="adv-option-button"></select>
+
+								<button id="increaseFontSize"> A + </button>
+								<button id="decreaseFontSize"> A - </button>                
+							</div>
+
+							<div class="fontsStyle borderRight">
+								<button id="makeTextUppercase"> Aa </button>            
+							</div>
+
+							<div class="fontsStyle">
+								<button id="removeFormatting" class="option-button">
+									A <i class="fa-solid fa-eraser"></i>
+								</button>
+							</div>
 						</div>
 
-						<div class="textFormat">
-							<button id="bold" class="option-button format">
-								<i class="fa-solid fa-bold"></i>
-							</button>
+						<div class="line">
+							<div class="textFormat borderRight">
+								<button id="bold" class="option-button format">
+									<i class="fa-solid fa-bold"></i>
+								</button>
 
-							<button id="italic" class="option-button format">
-								<i class="fa-solid fa-italic"></i>
-							</button>
+								<button id="italic" class="option-button format">
+									<i class="fa-solid fa-italic"></i>
+								</button>
 
-							<button id="underline" class="option-button format">
-								<i class="fa-solid fa-underline"></i>
-							</button>
+								<button id="underline" class="option-button format">
+									<i class="fa-solid fa-underline"></i>
+								</button>
 
-							<button id="strikethrough" class="option-button format">
-								<i class="fa-solid fa-strikethrough"></i>
-							</button>
+								<button id="strikethrough" class="option-button format">
+									<i class="fa-solid fa-strikethrough"></i>
+								</button>
 
-							<button id="superscript" class="option-button format scriptFormat">
-								<i class="fa-solid fa-superscript"></i>
-							</button>
+								<div class="btnScriptFormat">
+									<button id="superscript" class="option-button format">
+										<i class="fa-solid fa-superscript"></i>
+									</button>
 
-							<button id="subscript" class="option-button format scriptFormat">
-								<i class="fa-solid fa-subscript"></i>
-							</button>
+									<button id="subscript" class="option-button format">
+										<i class="fa-solid fa-subscript"></i>
+									</button>
+								</div>
+							</div>
+
+							<div class="color">
+								<input type="color" id="backColor" name="backColor" class="adv-option-button">
+								<input type="color" id="foreColor" name="foreColor" class="adv-option-button">
+							</div>
 						</div>
 					</div>
 
 					<h6> Fonte </h6>
 				</div>
 
-				<div class="box-inicial">
+				<div class="box-inicial borderRight">
 					<div class="paragraph">
 						<div class="list">
-							<div class="btnList">
+							<div class="btnList borderRight">
 								<button id="insertUnorderedList" class="option-button">
 									<i class="fa-solid fa-list-ul"></i>
 								</button>
@@ -130,9 +154,7 @@
 							</button>
 						</div>
 
-						<div class="orderColor">
-							<input type="color" name="paintBucket" class="adv-option-button">
-
+						<div class="order">
 							<i class="fa-solid fa-arrow-down-a-z"></i>
 						</div>
 					</div>
@@ -140,7 +162,7 @@
 					<h6> Parágrafo </h6>
 				</div>
 
-				<div class="box-inicial expan">
+				<div class="box-inicial borderRight expan">
 					<div class="titlesStylesContainer" id="expandableContainer">
 						<div class="titlesStyles">
 							<div class="titleStyle active">
@@ -175,7 +197,7 @@
 								Subtítulo 3
 							</div>
 						</div>
-						
+
 						<div class="btnsScroll">
 							<button id="btnScrollUp"> <i class="fa-solid fa-angle-up"></i> </button>
 							<button id="btnScrollDown"> <i class="fa-solid fa-angle-down"></i> </button>
@@ -186,7 +208,6 @@
 					<h6> Estilos </h6>
 				</div>
 			</div>
-
 		</div>
 	</header>
 
@@ -197,6 +218,7 @@
 	<!-- Clique em Ctrl + Alguma tecla -->
 
 	<script type="text/javascript" src="./js/script.js"></script>
+	<script type="text/javascript" src="./js/scriptContentMenu.js"></script>
 	<script type="text/javascript" src="./js/scriptAtalhos.js"></script>
 </body>
 </html>
