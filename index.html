@@ -44,7 +44,7 @@
 
 			<div class="boxBtns-Header">
 				<button> <i class="far fa-comment-alt"></i> Comentários </button>
-				<button> <i class="fa fa-pencil"></i> Editando </button>
+				<button id="btnEdt"> <i class="fa fa-pencil"></i> Editando </button>
 				<button class="share"> <i class="far fa-share-from-square"></i> Compartilhamento </button>
 			</div>
 		</div>
@@ -103,8 +103,17 @@
 							</div>
 
 							<div class="color">
-								<input type="color" id="backColor" name="backColor" class="adv-option-button">
-								<input type="color" id="foreColor" name="foreColor" class="adv-option-button">
+								<div class="destacar btnsColor">
+									<label for="backColor">
+										<i class="fa-solid fa-highlighter"></i>
+									</label>
+									<input type="color" id="backColor" name="backColor" class="adv-option-button">
+								</div>
+
+								<div class="textColor btnsColor">
+									<label for="foreColor"> A </label>
+									<input type="color" id="foreColor" name="foreColor" class="adv-option-button">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -216,6 +225,15 @@
 	</div>
 
 	<!-- Clique em Ctrl + Alguma tecla -->
+
+	<footer>
+		<div class="btnsZoom">
+			<button id="zoomOut"> - </button>
+			<input id="zoomSlider" type="range" min="60" max="140" value="100" name="">
+			<button id="zoomIn"> + </button>
+			<div id="value"></div>
+		</div>
+	</footer>
 
 	<script type="text/javascript" src="./js/script.js"></script>
 	<script type="text/javascript" src="./js/scriptAtalhos.js"></script>
