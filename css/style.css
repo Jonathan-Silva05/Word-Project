@@ -16,6 +16,7 @@ header {
 	top: 0;
 	overflow: hidden;
 	padding: 5px;
+	user-select: none;
 }
 
 .box-contentHeader {
@@ -23,6 +24,14 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	padding: 2.5px 0px;
+}
+
+button:enabled {
+	cursor: pointer; /* Define o cursor como pointer para botões habilitados */
+}
+
+button:disabled {
+	cursor: none !important; /* Define o cursor como not-allowed para botões desabilitados */
 }
 
 .box-contentHeader .undoRedo {
@@ -34,6 +43,7 @@ header {
 }
 
 .undoRedo button:hover,
+.fontsStyle button:hover,
 .btnsBackOff button:hover {
 	border: 1px solid #35353535;
 }
@@ -49,9 +59,12 @@ nav button {
 	padding: 2px;
 }
 
-nav button:hover,
+nav button:hover {
+	border-bottom: 2px solid #CCCCCC;
+}
+
 nav .btnActive {
-	border-bottom: 2px solid #000000;
+	border-bottom: 2px solid #305077 !important;
 }
 
 .boxBtns-Header {
@@ -61,7 +74,8 @@ nav .btnActive {
 }
 
 .boxBtns-Header button {
-	border: 1px solid;
+	background: #FFFFFF;
+	border: 1px solid #8a898f;
 	border-radius: 4px;
 	display: flex;
 	align-items: center;
@@ -70,8 +84,17 @@ nav .btnActive {
 	padding: 4.5px 7px;
 }
 
+.boxBtns-Header button.share {
+	background: #1A59C2;
+	color: #FFFFFF;
+}
+
+i {
+	background: none;
+}
+
 .containerMenu {
-	border: 1px solid;
+	border-bottom: 1px solid #CCCCCC;
 	display: flex;
 	align-items: start;
 	justify-content: center;
@@ -90,8 +113,11 @@ nav .btnActive {
 	gap: 5px;
 }
 
+.borderRight {
+	border-right: 1px solid #CCCCCC;
+}
+
 .box-inicial {
-	border-right: 1px solid #CCC;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -102,7 +128,7 @@ nav .btnActive {
 
 .box-inicial button{
 	padding: 5px;
-	border: none;
+	border: 1px solid #FFFFFF;
 }
 
 .expan {
@@ -122,35 +148,65 @@ nav .btnActive {
 	text-align: center;
 }
 
+.font {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5px;
+}
+
+.font .line {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
 .font .fontsStyle {
-	display: grid;
-	grid-template-columns: auto 28%;
+	display: flex;
 	gap: 1px;
-	width: 100%;
+	padding: 0px 5px;
+}
+
+.fontsStyle #removeFormatting i{
+	color: #8b4794;
 }
 
 .font select {
 	padding: 2.5px 0.5px;
 }
 
-.font .textFormat {
+.font select#fontSize {
+	width: 50px;
+}
+
+option {
+	padding: 2.5px 0.5px;
+}
+
+.fontsStyle button {
 	display: flex;
-	gap: 17px;
-	padding: 6px 8px;
+	flex-direction: row;
+	padding: 5px;
+}
+
+.font .textFormat,
+.font .color {
+	display: flex;
+	gap: 10px;
+	padding: 2.5px 6px;
+}
+
+.font input[type=color]{
+	position: relative;
+	border: none;
+	height: 15px;
+	width: 20px;
+	outline: none;
 }
 
 .paragraph {
 	display: flex;
 	flex-direction: column;
 	gap: 2.5px;
-}
-
-.paragraph .orderColor input[name=paintBucket]{
-	position: relative;
-	border: none;
-	height: 15px;
-	width: 20px;
-	outline: none;
 }
 
 .paragraph .list {
@@ -160,7 +216,7 @@ nav .btnActive {
 }
 
 .titlesStylesContainer {
-	border: 1px solid #CCC;
+	border: 1px solid #CCCCCC;
 	display: flex;
 	flex-direction: row;
 	overflow: hidden;
@@ -208,7 +264,6 @@ nav .btnActive {
 
 .titleStyle:hover,
 .active {
-	background: #e0e9ff;
 	border: 1px solid #000000 !important;
 }
 
@@ -239,10 +294,14 @@ nav .btnActive {
 }
 
 #textDocument{
-	border: 1px solid #000000;
+	border: 1px solid #c5c5c5;
 	height: 272.5mm;
 	width: 210mm;
 	margin: 10px auto;
+	outiline: none;
 	padding: 20px;
 }
 
+#textDocument:focus{
+	outiline: 1px solid #c5c5c5;
+}
