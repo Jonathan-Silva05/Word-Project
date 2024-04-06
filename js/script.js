@@ -111,9 +111,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Definir as cores iniciais para foreColor e backColor
-  document.getElementById('backColor').value = '#FFFF00'; // Branco para backColor
-  document.getElementById('foreColor').value = '#FF0000'; // Preto para foreColor
+  // Função para ordenar o conteúdo da div
+  function sortContent() {
+    // Obtém o elemento da div
+    var div = document.getElementById('textDocument');
+    
+    // Divide o conteúdo da div em um array de linhas
+    var lines = div.innerText.split('\n');
+    
+    // Ordena o array de linhas
+    lines.sort();
+    
+    // Junta o array de volta em uma string e coloca de volta na div
+    div.innerText = lines.join('\n');
+  }
+
+  // Adiciona um ouvinte de eventos ao botão para chamar a função de ordenação
+  document.getElementById('sortButton').addEventListener('click', sortContent);
+
 
   const advancedOptionButton = document.querySelectorAll(".adv-option-button");
   advancedOptionButton.forEach(button => {
@@ -121,6 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
       modifyText(button.id, false, button.value);
     });
   });
+
+  // Definir as cores iniciais para foreColor e backColor
+  document.getElementById('backColor').value = '#FFFF00'; // Branco para backColor
+  document.getElementById('foreColor').value = '#FF0000'; // Preto para foreColor
 
   // Função para adicionar fontes ao seletor de fontes
   const fontList = ["Arial", "Verdana", "Times New Roman", "Garamond", "Georgia", "Courier New", "cursive"];
@@ -131,6 +150,14 @@ document.addEventListener('DOMContentLoaded', function() {
     option.textContent = font;
     fontNameSelect.appendChild(option);
   });
+
+  function applyInitialFont() {
+    const selectedFont = document.getElementById('fontName').value;
+    document.getElementById('textDocument').style.fontFamily = selectedFont;
+  }
+
+  // Aplica a fonte inicial selecionada ao #textDocument
+  applyInitialFont();
 
   // Inicializador para tamanhos de fonte
   const fontSizeSelect = document.getElementById("fontSize");
@@ -200,8 +227,6 @@ document.addEventListener('DOMContentLoaded', function() {
     selection.addRange(range);
   });
 
-
-
   const textDocument = document.getElementById('textDocument');
 
   // Garante que textDocument é editável.
@@ -237,6 +262,83 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  let clipboardData = ''; // Armazena o conteúdo da área de transferência
+
+  // Função para copiar o conteúdo selecionado e armazenar
+  document.getElementById('copyButton').addEventListener('click', function() {
+    clipboardData = window.getSelection().toString();
+    navigator.clipboard.writeText(clipboardData).then(() => {
+      console.log('Conteúdo copiado para a área de transferência');
+    });
+  });
+
+  // Função para recortar o conteúdo selecionado e armazenar
+  document.getElementById('cutButton').addEventListener('click', function() {
+    clipboardData = window.getSelection().toString();
+    navigator.clipboard.writeText(clipboardData).then(() => {
+      console.log('Conteúdo recortado para a área de transferência');
+      document.execCommand('delete'); // Remove o texto selecionado
+    });
+  });
+
+  // Função para colar o último conteúdo armazenado
+  document.getElementById('pasteButton').addEventListener('click', function() {
+    navigator.clipboard.readText().then(text => {
+      document.execCommand('insertText', false, text);
+    });
+  });
+
+  // Objeto para armazenar os estilos a serem aplicados
+  let styleToApply = {};
+
+  // Mapeia comandos para estados para simplificar a verificação e aplicação
+  const styleCommands = [
+    'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+    'insertUnorderedList', 'insertOrderedList', 'indent', 'outdent',
+    'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'
+  ];
+
+  // Função para copiar os estilos do texto selecionado
+  function copyTextFormat() {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+      styleCommands.forEach(command => {
+        styleToApply[command] = document.queryCommandState(command);
+      });
+    }
+  }
+
+  // Função para aplicar os estilos copiados ao texto selecionado
+  function applyTextFormat() {
+    Object.keys(styleToApply).forEach(style => {
+      if (styleToApply[style]) {
+        document.execCommand(style, false, null);
+      }
+    });
+    // Limpa o objeto para futuras operações
+    styleToApply = {};
+  }
+
+  // Função para alternar estado de ativação da formatação
+  function toggleFormatting() {
+    const brushButton = document.getElementById('brushButton');
+    brushButton.classList.toggle('active');
+    if (brushButton.classList.contains('active')) {
+      copyTextFormat();
+    }
+  }
+
+  // Evento de clique para copiar a formatação e alternar estado de ativação
+  document.getElementById('brushButton').addEventListener('click', toggleFormatting);
+
+  // Aplica a formatação ao texto quando um elemento dentro de 'textDocument' é clicado
+  document.getElementById('textDocument').addEventListener('click', function() {
+    if (document.getElementById('brushButton').classList.contains('active')) {
+      applyTextFormat();
+      document.getElementById('brushButton').classList.remove('active');
+    }
+  });
+
   // Função para desabilitar os botões
   function disableAllButtons() {
     document.getElementById('btnScrollUp').disabled = true;
@@ -264,6 +366,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Adicionando o evento de clique ao botão de expansão de títulos
   document.getElementById('expandTitlesBtn').addEventListener('click', expandTitles);
+
+  document.getElementById('mic').addEventListener('click', function() {
+    const icon = this.querySelector('i');
+    
+    // Verifica se o ícone atual é 'fa-microphone-lines'
+    const isMicLines = icon.classList.contains('fa-microphone-lines');
+    
+    // Alterna entre 'fa-microphone-lines' e 'fa-microphone-lines-slash'
+    icon.classList.toggle('fa-microphone-lines', !isMicLines);
+    icon.classList.toggle('fa-microphone-lines-slash', isMicLines);
+  });
 
   let zoomLevel = 100;
   const zoomable = document.getElementById('textDocument');
@@ -309,3 +422,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+
+function updateFormattingButtonsState() {
+  const formattingCommands = [
+    { command: 'bold', elementId: 'bold' },
+    { command: 'italic', elementId: 'italic' },
+    { command: 'underline', elementId: 'underline' },
+    { command: 'strikethrough', elementId: 'strikethrough' },
+    { command: 'superscript', elementId: 'superscript' },
+    { command: 'subscript', elementId: 'subscript' },
+    { command: 'insertUnorderedList', elementId: 'insertUnorderedList' },
+    { command: 'insertOrderedList', elementId: 'insertOrderedList' },
+    { command: 'justifyLeft', elementId: 'justifyLeft' },
+    { command: 'justifyCenter', elementId: 'justifyCenter' },
+    { command: 'justifyRight', elementId: 'justifyRight' },
+    { command: 'justifyFull', elementId: 'justifyFull' }
+  ];
+
+  // Itera sobre cada comando de formatação e atualiza o estado do botão correspondente
+  formattingCommands.forEach(({ command, elementId }) => {
+    const button = document.getElementById(elementId);
+    if (button) { // Verifica se o botão existe
+      if (document.queryCommandState(command)) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    }
+  });
+}
+
+// Chama a função quando ocorrerem eventos que possam alterar o estado da formatação
+textDocument.addEventListener('click', updateFormattingButtonsState);
+textDocument.addEventListener('keyup', updateFormattingButtonsState);
+textDocument.addEventListener('mouseup', updateFormattingButtonsState);// Para detecção de mudança após seleção de texto com o mouse
