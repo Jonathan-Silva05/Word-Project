@@ -5,7 +5,6 @@
 	padding: 0;
 	box-sizing: border-box;
 	background: #FFFFFF;
-	font-family: Arial;
 	outline: soslid;
 }
 
@@ -20,11 +19,18 @@ header {
   z-index: 100;
 }
 
+header * {
+	font-family: Arial;
+}
+
 .box-contentHeader {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 2.5px 0px;
+}
+.uppercase-transform {
+    text-transform: uppercase;
 }
 
 button:enabled {
@@ -99,7 +105,7 @@ i {
 	display: flex;
 	align-items: start;
 	justify-content: center;
-	height: 110px;
+	height: auto;
 	padding: 5px 0px;
 	text-align: center;
 }
@@ -112,6 +118,7 @@ i {
 	display: flex;
 	flex-direction: row;
 	gap: 5px;
+	border-left: 1px solid #CCCCCC;
 }
 
 .borderRight {
@@ -132,6 +139,18 @@ i {
 	border: 1px solid #FFFFFF;
 }
 
+.box-inicial .rotateCut {
+	rotate: -90deg;
+}
+
+.box-inicial .rotateBrush {
+	rotate: -135deg;
+}
+
+.box-inicial .rotateSearch {
+	rotate: 90deg;
+}
+
 .expan {
 	display: flex;
 	flex-direction: column;
@@ -147,6 +166,30 @@ i {
 	right: 0px;
 	position: absolute;
 	text-align: center;
+}
+
+.workspace {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.titleIcon label {
+	font-size: .8em;
+}
+
+.iconSize {
+	padding: 0px 5px;
+	font-size: 2.25em;
+}
+
+label, input[type=color] {
+	cursor: pointer;
 }
 
 .font {
@@ -239,7 +282,7 @@ option {
 	max-height: 57px;
 	position: absolute;
 	top: 8px;
-	z-index: 2;
+	z-index: 1002;
 }
 
 .titlesStylesContainer.expanded {
@@ -292,7 +335,6 @@ option {
 }
 
 .btnsScroll button {
-	cursor: pointer;
 	border: 1px solid;
 	padding: .6px .8px;
 }
@@ -300,6 +342,30 @@ option {
 .btnsScroll button i {
 	font-size: .7em;
 }
+
+#mic {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 54px;
+	width: 57px;
+}
+
+.final {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+.final button {
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline: none;
+}
+
+
 
 /* =============================================
  - CONTEÚDO
