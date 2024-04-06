@@ -29,9 +29,6 @@ header * {
 	justify-content: space-between;
 	padding: 2.5px 0px;
 }
-.uppercase-transform {
-    text-transform: uppercase;
-}
 
 button:enabled {
 	cursor: pointer; /* Define o cursor como pointer para botões habilitados */
