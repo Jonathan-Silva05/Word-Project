@@ -11,6 +11,49 @@ document.addEventListener('DOMContentLoaded', updateUndoRedoButtons);
 
 
 document.addEventListener('DOMContentLoaded', function() {
+  const buttonIdToDivSelector = {
+    btnInicial: '.contentInicial',
+    btnInserir: '.contentInserir',
+    btnDesenhar: '.contentDesenhar',
+    btnDesign: '.contentDesign',
+    btnLayout: '.contentLayout',
+    btnReferencia: '.contentReferencia',
+    btnCorresp: '.contentCorresp',
+    btnRevisao: '.contentRevisao',
+    btnExibir: '.contentExibir',
+  };
+
+  function toggleContentDisplay(buttonId) {
+    // Esconde todas as divs
+    Object.values(buttonIdToDivSelector).forEach(selector => {
+      const div = document.querySelector(selector);
+      if (div) div.style.display = 'none';
+    });
+
+    // Mostra a div correspondente ao botão ativo
+    const selector = buttonIdToDivSelector[buttonId];
+    const divToShow = document.querySelector(selector);
+    if (divToShow) divToShow.style.display = 'flex';
+
+    // Atualiza a classe btnActive
+    document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('btnActive'));
+    document.querySelector(`nav button[id="${buttonId}"]`).classList.add('btnActive');
+  }
+
+  // Event listener para o botão na div .final
+  document.querySelector('.final button').addEventListener('click', () => {
+    toggleContentDisplay(''); // Esconde todas as divs
+  });
+
+  // Event listener para botões de navegação
+  document.querySelectorAll('nav button[id^="btn"]').forEach(button => {
+    button.addEventListener('click', () => toggleContentDisplay(button.id));
+  });
+
+  // Configuração inicial: Mostra a div do botão ativo ou o estado inicial
+  const activeBtnId = document.querySelector('nav button.btnActive')?.id || 'btnInicial';
+  toggleContentDisplay(activeBtnId);
+
   // Função para remover a classe 'active' de todos os títulos
   function removeActiveTitleStyle() {
     document.querySelectorAll('.titleStyle').forEach(titleStyle => {
@@ -296,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
     'insertUnorderedList', 'insertOrderedList', 'indent', 'outdent',
     'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'
-  ];
+    ];
 
   // Função para copiar os estilos do texto selecionado
   function copyTextFormat() {
@@ -437,7 +480,7 @@ function updateFormattingButtonsState() {
     { command: 'justifyCenter', elementId: 'justifyCenter' },
     { command: 'justifyRight', elementId: 'justifyRight' },
     { command: 'justifyFull', elementId: 'justifyFull' }
-  ];
+    ];
 
   // Itera sobre cada comando de formatação e atualiza o estado do botão correspondente
   formattingCommands.forEach(({ command, elementId }) => {
