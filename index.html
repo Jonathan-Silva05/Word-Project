@@ -6,6 +6,7 @@
 
 	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/styleIcons.css">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -16,15 +17,24 @@
 <body>
 	<header>
 		<div class="box-contentHeader">
-			<div class="undoRedo"> <!-- Desfazer/Refazer -->
-				<button id="undo" class="option-button">
-					<i class="fa-solid fa-rotate-left"></i>
-				</button>
+			<div class="btnsHeader">
+				<div class="saveButton">
+					<button id="save" class="option-button">
+						<i class="fa-solid fa-save fa-lg"></i>
+					</button>
+				</div>
+				<div class="undoRedo"> <!-- Desfazer/Refazer -->
+					<button id="undo" class="option-button">
+						<i class="fa-solid fa-rotate-left fa-lg"></i>
+					</button>
 
-				<button id="redo" class="option-button">
-					<i class="fa-solid fa-rotate-right"></i>
-				</button>
+					<button id="redo" class="option-button">
+						<i class="fa-solid fa-rotate-right fa-lg"></i>
+					</button>
+				</div>
 			</div>
+			<button onclick="toggleTheme()">Alternar Tema</button>
+
 		</div>
 
 		<div class="box-contentHeader">
@@ -85,8 +95,12 @@
 								<select id="fontName" class="adv-option-button"></select>
 								<select id="fontSize" class="adv-option-button"></select>
 
-								<button id="increaseFontSize"> A + </button>
-								<button id="decreaseFontSize"> A - </button>                
+								<button id="increaseFontSize">
+									A <strong> + </strong>
+								</button>
+								<button id="decreaseFontSize">
+									A <strong> - </strong>
+								</button>                
 							</div>
 
 							<div class="fontsStyle borderRight">
@@ -102,29 +116,29 @@
 
 						<div class="line">
 							<div class="textFormat borderRight">
-								<button id="bold" class="option-button format">
+								<button id="bold" class="option-button format" title="Bold (Ctrl+B)">
 									<i class="fa-solid fa-bold"></i>
 								</button>
 
-								<button id="italic" class="option-button format">
+								<button id="italic" class="option-button format" title="Italic (Ctrl+I)">
 									<i class="fa-solid fa-italic"></i>
 								</button>
 
-								<button id="underline" class="option-button format">
+								<button id="underline" class="option-button format" title="Underline (Ctrl+U)">
 									<i class="fa-solid fa-underline"></i>
 								</button>
 
-								<button id="strikethrough" class="option-button format">
+								<button id="strikethrough" class="option-button format" title="">
 									<i class="fa-solid fa-strikethrough"></i>
 								</button>
 
 								<div class="btnScriptFormat">
-									<button id="superscript" class="option-button format">
-										<i class="fa-solid fa-superscript"></i>
+									<button id="subscript" class="option-button format" title="">
+										<i class="fa-solid fa-subscript"></i>
 									</button>
 
-									<button id="subscript" class="option-button format">
-										<i class="fa-solid fa-subscript"></i>
+									<button id="superscript" class="option-button format" title="">
+										<i class="fa-solid fa-superscript"></i>
 									</button>
 								</div>
 							</div>
@@ -306,12 +320,11 @@
 			<div class="contentRevisao"> Revisão - Em Desenvolvimento </div>
 
 			<div class="contentExibir"> Exibir - Em Desenvolvimento </div>
-
 		</div>
 	</header>
 
 	<div class="contentText">
-		<div id="textDocument" contenteditable="true"></div>
+		<div id="textDocument" class="textDocument" contenteditable="true"></div>
 	</div>
 
 	<!-- Clique em Ctrl + Alguma tecla -->
