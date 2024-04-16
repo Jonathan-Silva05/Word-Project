@@ -1,0 +1,83 @@
+.saveButton #save i {
+	padding: 7.5px 0px;
+	/* Define o gradiente como plano de fundo */
+	background: linear-gradient(to right, #ce8ad7, #8b4794);
+
+	/* Faz o texto do ícone ser transparente para mostrar o plano de fundo */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	/* Garante que o ícone se adapte ao tamanho do texto e centralize o gradiente */
+	display: inline-block;
+	background-clip: text;
+}
+
+.titleIcon #pasteButton i {
+	background:
+		linear-gradient(to right, #d48a43 38%, #000000 38%) center,
+		linear-gradient(to right, #d48a43 38%, #d48a43 38%) top,
+		linear-gradient(to right, #d48a43 38%, #000000 38%) bottom;
+	background-repeat: no-repeat;
+	background-size: 100% 55%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+	background-clip: text;
+}
+
+.workspace #brushButton i {
+	background:
+		linear-gradient(to bottom, #d48a43 50%, #414141 50%);
+	background-repeat: no-repeat;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+	background-clip: text;
+}
+
+.btnScriptFormat #subscript i ,
+.btnScriptFormat #superscript i { 
+	background: linear-gradient(to right, #000000 50%, #000000 76%, #1A59C2 76%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+	background-clip: text;
+}
+
+.btnList #insertUnorderedList i ,
+.btnList #insertOrderedList i {
+	background: linear-gradient(to left, #000000 50%, #000000 72%, #1A59C2 72%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+	background-clip: text;	
+}
+
+.btnsBackOff #indent i,
+.btnsBackOff #outdent i {
+	background: 
+		linear-gradient(to right, #1A59C2 33%, #000000 33%) center,
+		linear-gradient(to right, #000000 33%, #000000 33%) top,
+		linear-gradient(to right, #000000 33%, #000000 33%) bottom;
+	background-repeat: no-repeat;
+	background-size: 100% 40%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+	background-clip: text;
+}
+
+.order #sortButton i {
+	/* Configuração do tamanho para garantir que o efeito fique como quadrados */
+	background:
+		linear-gradient(to left, #1A59C2 50%, #000000 50%) top,
+		linear-gradient(to left, #000000 50%, #000000 50%) bottom;
+	background-repeat: no-repeat;
+	background-size: 100% 51%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	display: inline-block;
+	background-clip: text;
+}
+
+
