@@ -33,8 +33,15 @@
 					</button>
 				</div>
 			</div>
-			<button onclick="toggleTheme()">Alternar Tema</button>
 
+			<div class="box-theme">
+				<input type="checkbox" class="checkbox" id="chk" />
+				<label class="label" for="chk">
+					<i class="fas fa-moon"></i>
+					<i class="fas fa-sun"></i>
+					<div class="ball"></div>
+				</label>
+			</div>
 		</div>
 
 		<div class="box-contentHeader">
@@ -116,29 +123,53 @@
 
 						<div class="line">
 							<div class="textFormat borderRight">
-								<button id="bold" class="option-button format" title="Bold (Ctrl+B)">
+								<button id="bold" class="option-button format" aria-label="Bold (Ctrl+B)">
 									<i class="fa-solid fa-bold"></i>
+									<span class="tooltip-text">
+										<p>Bold (Ctrl+B)</p>
+										<p>Colocar o texto em negrito.</p>
+									</span>
 								</button>
 
-								<button id="italic" class="option-button format" title="Italic (Ctrl+I)">
+								<button id="italic" class="option-button format" aria-label="Italic (Ctrl+I)">
 									<i class="fa-solid fa-italic"></i>
+									<span class="tooltip-text">
+										<p>Italic (Ctrl+I)</p>
+										<p>Colocar o texto em itálico.</p>
+									</span>
 								</button>
 
-								<button id="underline" class="option-button format" title="Underline (Ctrl+U)">
+								<button id="underline" class="option-button format" aria-label="Underline (Ctrl+U)">
 									<i class="fa-solid fa-underline"></i>
+									<span class="tooltip-text">
+										<p>Underline (Ctrl+U)</p>
+										<p>Colocar o texto em sublinhado.</p>
+									</span>
 								</button>
 
-								<button id="strikethrough" class="option-button format" title="">
+								<button id="strikethrough" class="option-button format" aria-label="Strikethrough">
 									<i class="fa-solid fa-strikethrough"></i>
+									<span class="tooltip-text">
+										<p>Strikethrough</p>
+										<p>Colocar o texto riscado.</p>
+									</span>
 								</button>
 
 								<div class="btnScriptFormat">
-									<button id="subscript" class="option-button format" title="">
+									<button id="subscript" class="option-button format" aria-label="Subscript">
 										<i class="fa-solid fa-subscript"></i>
+										<span class="tooltip-text">
+											<p>Subscript</p>
+											<p>Colocar o texto como subscrito.</p>
+										</span>
 									</button>
 
-									<button id="superscript" class="option-button format" title="">
+									<button id="superscript" class="option-button format" aria-label="Superscript">
 										<i class="fa-solid fa-superscript"></i>
+										<span class="tooltip-text">
+											<p>Superscript</p>
+											<p>Colocar o texto como sobrescrito.</p>
+										</span>
 									</button>
 								</div>
 							</div>
