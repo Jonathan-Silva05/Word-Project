@@ -10,25 +10,25 @@ document.querySelectorAll('.textDocument').forEach(textDocument => {
   textDocument.addEventListener('input', updateUndoRedoButtons);
 });
 
-function toggleTheme() {
-  const rootElement = document.documentElement; // Acessa o elemento raiz do documento
-  const currentTheme = rootElement.getAttribute('data-theme') || (localStorage.getItem('theme') || 'light'); // Obtém o tema atual
+const TOGGLE = document.getElementById("chk");
+const THEME = window.localStorage.getItem("theme");
 
-  if (currentTheme === 'dark') {
-    rootElement.setAttribute('data-theme', 'light'); // Muda para o tema claro
-    localStorage.setItem('theme', 'light'); // Armazena o tema claro no armazenamento local
+// Verifica o tema e atualiza a caixa de seleção
+if (THEME === "dark") {
+  document.body.classList.add("dark");
+  TOGGLE.checked = true;
+}
+
+TOGGLE.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  //Atualiza o tema no armazenamento local com base no estado da caixa de seleção
+  if (TOGGLE.checked) {
+    window.localStorage.setItem("theme", "dark");
   } else {
-    rootElement.setAttribute('data-theme', 'dark'); // Muda para o tema escuro
-    localStorage.setItem('theme', 'dark'); // Armazena o tema escuro no armazenamento local
+    window.localStorage.setItem("theme", "light");
   }
-}
-
-function applyInitialTheme() {
-  const savedTheme = localStorage.getItem('theme') || 'light'; // Obtém o tema salvo ou padrão para 'light'
-  document.documentElement.setAttribute('data-theme', savedTheme);
-}
-
-applyInitialTheme(); // Aplica o tema salvo quando a página é carregada
+});
 
 document.addEventListener('DOMContentLoaded', updateUndoRedoButtons);
 
