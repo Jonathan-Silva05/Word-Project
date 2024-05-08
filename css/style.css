@@ -3,6 +3,7 @@
 /* Definição de variáveis de cores para tema claro */
 :root {
 	--background-color: #FFFFFF;
+	--text-color: #000000;
 	--border-color: #CCCCCC;
 	--button-hover-border-color: #35353535;
 	--button-active-border-color: #305077;
@@ -16,8 +17,9 @@
 }
 
 /* Definição de variáveis de cores para tema escuro */
-[data-theme="dark"] {
+.dark {
 	--background-color: #333333;
+	--text-color: #FFFFFF;
 	--border-color: #555555;
 	--button-hover-border-color: #AAAAAA;
 	--button-active-border-color: #5077A9;
@@ -46,7 +48,7 @@ header {
 	overflow: hidden;
 	padding: 5px;
 	user-select: none;
-  z-index: 100;
+	z-index: 100;
 }
 
 header * {
@@ -74,21 +76,68 @@ header * {
 }
 
 button:enabled {
+	color: var(--text-color);
 	cursor: pointer; /* Define o cursor como pointer para botões habilitados */
 }
 
 button:disabled {
+	color: auto;
 	cursor: not-allowed; !important; /* Define o cursor como not-allowed para botões desabilitados */
 }
 
 .saveButton button,
 .undoRedo button {
-	border: 1px solid #FFFFFF;
+	border: 1px solid var(--background-color);
 }
 
-.fontsStyle button:hover,
-.btnsBackOff button:hover {
-	border: 1px solid #35353535;
+.box-theme {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.checkbox {
+	opacity: 0;
+	position: absolute;
+	visibility: hidden;
+}
+
+.label {
+	background-color: #111;
+	border-radius: 50px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 5px;
+	position: relative;
+	height: 26px;
+	width: 50px;
+}
+
+.label .ball {
+	background-color: #FFFFFF;
+	border-radius: 50%;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: 22px;
+	width: 22px;
+	transform: translateX(0px);
+	transition: transform 0.5s linear;
+}
+
+.checkbox:checked + .label .ball {
+	transform: translateX(24px);
+}
+
+.fa-moon {
+	color: #f1c40f;
+}
+
+.fa-sun {
+	color: #f39c12;
 }
 
 nav {
@@ -97,8 +146,14 @@ nav {
 	gap: 12px;
 }
 
+nav *,
+.boxBtns-Header ,
+.containerMenu {
+	color: var(--text-color);
+}
+
 nav button {
-	border: 2px solid #FFFFFF;
+	border: 2px solid var(--background-color);
 	padding: 2px;
 }
 
@@ -108,7 +163,7 @@ nav button:hover {
 
 nav .btnActive {
 	font-weight: bold;
-	border-bottom: 2px solid #1A59C2 !important;
+	border-bottom: 2px solid var(--share-button-background) !important;
 }
 
 .boxBtns-Header {
@@ -118,7 +173,6 @@ nav .btnActive {
 }
 
 .boxBtns-Header button {
-	background: #FFFFFF;
 	border: 1px solid #8a898f;
 	border-radius: 4px;
 	display: flex;
@@ -129,8 +183,8 @@ nav .btnActive {
 }
 
 .boxBtns-Header button.share {
-	background: #1A59C2;
-	color: #FFFFFF;
+	background: var(--share-button-background);
+	color: var(--share-button-color) !important;
 }
 
 i {
@@ -172,7 +226,7 @@ i {
 
 .box-inicial button{
 	padding: 5px;
-	border: 1px solid #FFFFFF;
+	border: 1px solid var(--background-color);
 }
 
 .box-inicial .rotateCut {
@@ -246,6 +300,11 @@ label, input[type=color] {
 	padding: 0px 5px;
 }
 
+.fontsStyle button:hover,
+.btnsBackOff button:hover {
+	border: 1px solid var(--button-hover-border-color);
+}
+
 .fontsStyle #increaseFontSize,
 .fontsStyle #decreaseFontSize {
 	display: flex;
@@ -259,7 +318,7 @@ label, input[type=color] {
 
 .fontsStyle #increaseFontSize strong,
 .fontsStyle #decreaseFontSize strong {
-	color: #1A59C2;
+	color: var(--share-button-background);;
 	padding-left: 2.5px;
 }
 
@@ -273,6 +332,7 @@ label, input[type=color] {
 
 .font select {
 	padding: 2.5px 0.5px;
+	color: var(--text-color);
 }
 
 .font select#fontSize {
@@ -287,6 +347,36 @@ option {
 	display: flex;
 	flex-direction: row;
 	padding: 5px;
+}
+
+.textFormat .tooltip-text {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	border: 1px solid #C5C5C5;
+	margin-top: 8px;
+	padding: 5px;
+	opacity: 0;
+	position: absolute;
+	text-align: justify;
+	transition: all 0.3s ease;
+	transition-delay: 1.5s;
+	visibility: hidden;
+	width: 180px;
+	z-index: 1;
+}
+
+.tooltip-text p:first-child {
+	font-weight: bold;
+}
+
+.tooltip-text p:last-child {
+	font-size: 0.8em;
+}
+
+.option-button:hover .tooltip-text {
+	opacity: 1;
+	visibility: visible;
 }
 
 .font .textFormat,
@@ -326,6 +416,12 @@ option {
 }
 
 .paragraph .list {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+.paragraph .list div {
 	display: flex;
 	flex-direction: row;
 	gap: 5px;
@@ -438,41 +534,42 @@ option {
 	width: 210mm;
 	margin: 10px auto;
 	padding: 35px;
-  transition: transform 0.2s;
-  transform-origin: center center;
+	transition: transform 0.2s;
+	transform-origin: center center;
 }
 
 /* =============================================
  - RODAPÉ
 ============================================= */
 footer {
-  background: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: fixed;
-  z-index: 1000;
+	background: var(--background-color);
+	color: var(--text-color);
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: fixed;
+	z-index: 1000;
 }
 
 .btnsZoom {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .9em;
-  gap: 5px;
-  padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: .9em;
+	gap: 5px;
+	padding: 10px;
 }
 
 .btnsZoom button {
-  border: none;
-  font-weight: bold;
+	border: none;
+	font-weight: bold;
 }
 
 .btnsZoom #value {
-  text-align: center;
-  width: 40px;
+	text-align: center;
+	width: 40px;
 }
 

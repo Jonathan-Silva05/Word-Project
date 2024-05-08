@@ -14,9 +14,9 @@
 
 .titleIcon #pasteButton i {
 	background:
-		linear-gradient(to right, #d48a43 38%, #000000 38%) center,
-		linear-gradient(to right, #d48a43 38%, #d48a43 38%) top,
-		linear-gradient(to right, #d48a43 38%, #000000 38%) bottom;
+		linear-gradient(to right, #d48a43 35%, var(--text-color) 35%) center,
+		linear-gradient(to right, #d48a43 35%, #d48a43 35%) top,
+		linear-gradient(to right, #d48a43 35%, var(--text-color) 35%) bottom;
 	background-repeat: no-repeat;
 	background-size: 100% 55%;
 	-webkit-background-clip: text;
@@ -37,7 +37,7 @@
 
 .btnScriptFormat #subscript i ,
 .btnScriptFormat #superscript i { 
-	background: linear-gradient(to right, #000000 50%, #000000 76%, #1A59C2 76%);
+	background: linear-gradient(to right, var(--text-color) 50%, var(--text-color) 70%, var(--share-button-background) 70%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	display: inline-block;
@@ -46,7 +46,7 @@
 
 .btnList #insertUnorderedList i ,
 .btnList #insertOrderedList i {
-	background: linear-gradient(to left, #000000 50%, #000000 72%, #1A59C2 72%);
+	background: linear-gradient(to left, var(--text-color) 50%, var(--text-color) 72%, var(--share-button-background) 72%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	display: inline-block;
@@ -56,9 +56,9 @@
 .btnsBackOff #indent i,
 .btnsBackOff #outdent i {
 	background: 
-		linear-gradient(to right, #1A59C2 33%, #000000 33%) center,
-		linear-gradient(to right, #000000 33%, #000000 33%) top,
-		linear-gradient(to right, #000000 33%, #000000 33%) bottom;
+		linear-gradient(to right, var(--share-button-background) 33%, var(--text-color) 33%) center,
+		linear-gradient(to right, var(--text-color) 33%, var(--text-color) 33%) top,
+		linear-gradient(to right, var(--text-color) 33%, var(--text-color) 33%) bottom;
 	background-repeat: no-repeat;
 	background-size: 100% 40%;
 	-webkit-background-clip: text;
@@ -70,8 +70,8 @@
 .order #sortButton i {
 	/* Configuração do tamanho para garantir que o efeito fique como quadrados */
 	background:
-		linear-gradient(to left, #1A59C2 50%, #000000 50%) top,
-		linear-gradient(to left, #000000 50%, #000000 50%) bottom;
+		linear-gradient(to left, var(--share-button-background) 50%, var(--text-color) 50%) top,
+		linear-gradient(to left, var(--text-color) 50%, var(--text-color) 50%) bottom;
 	background-repeat: no-repeat;
 	background-size: 100% 51%;
 	-webkit-background-clip: text;
