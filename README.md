@@ -1,9 +1,9 @@
 # Projeto | Project
   ***[PT-BR]***
-  O *Word-project* é uma réplica do *Word* da Office 365, feito em *HTML*, *CSS* e *JS*. Este projeto busca proporcionar uma experiência similar ao software original, permitindo que os usuários criem, editem e formatem seus documentos de texto diretamente de seu navegador, sem a necessidade de instalar softwares adicionais. Além das funcionalidades básicas de edição de texto, o projeto também inclui características avançadas de formatação e edição para garantir que os usuários possam personalizar seus documentos conforme necessário.
+  O *[Word-project](https://jonathan-silva05.github.io/Word-Project/)* é uma réplica do *Word* da Office 365, feito em *HTML*, *CSS* e *JS*. Este projeto busca proporcionar uma experiência similar ao software original, permitindo que os usuários criem, editem e formatem seus documentos de texto diretamente de seu navegador, sem a necessidade de instalar softwares adicionais. Além das funcionalidades básicas de edição de texto, o projeto também inclui características avançadas de formatação e edição para garantir que os usuários possam personalizar seus documentos conforme necessário.
 
   ***[ENG]***
-  The *Word-project* is a replica of *Word* from Office 365, made in *HTML*, *CSS*, and *JS*. This project aims to provide a similar experience to the original software, enabling users to create, edit, and format their text documents directly from their browser without the need to install additional software. Besides the basic text editing functionalities, the project also includes advanced formatting and editing features to ensure that users can customize their documents as needed.
+  The *[Word-project](https://jonathan-silva05.github.io/Word-Project/)* is a replica of *Word* from Office 365, made in *HTML*, *CSS*, and *JS*. This project aims to provide a similar experience to the original software, enabling users to create, edit, and format their text documents directly from their browser without the need to install additional software. Besides the basic text editing functionalities, the project also includes advanced formatting and editing features to ensure that users can customize their documents as needed.
 
 # Dados do Projeto | Project Data
   ***[PT-BR]***
